@@ -1,22 +1,39 @@
-// Program to find the minimum (or maximum) element of an array
-
 #include <iostream>
-#include <algorithm>
+#include <vector>
 
-using namespace std;
+struct MinMaxPair {
+    int min;
+    int max;
+};
 
-// Driver Code
+MinMaxPair findMinMax(const std::vector<int>& arr) {
+    int n = arr.size();
+    MinMaxPair result;
+    
+    // Initialize min and max with the first element in the array
+    result.min = arr[0];
+    result.max = arr[0];
+
+    // Loop through the array to find the minimum and maximum
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < result.min) {
+            result.min = arr[i];
+        }
+        if (arr[i] > result.max) {
+            result.max = arr[i];
+        }
+    }
+
+    return result;
+}
+
 int main() {
-	// Input array
-	int a[] = { 1, 423, 6, 46, 34, 23, 13, 53, 4 };
-	int n = sizeof(a) / sizeof(a[0]);
+    std::vector<int> arr = {12, 34, 45, 6, 9, 56, 43, 78};
+    
+    MinMaxPair result = findMinMax(arr);
 
-	// Implemented inbuilt function to sort array
-	sort(a, a + n);
+    std::cout << "Minimum value: " << result.min << std::endl;
+    std::cout << "Maximum value: " << result.max << std::endl;
 
-	// after sorting the value at 0th position will minimum
-	// and nth position will be maximum
-	cout << "min-" << a[0] << " max-" << a[n - 1] << endl;
-
-	return 0;
+    return 0;
 }
